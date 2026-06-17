@@ -1,0 +1,10 @@
+/* Error banner styling for failed API requests. */
+
+.error-message {
+  background: rgba(78, 20, 35, 0.7);
+  border: 1px solid rgba(255, 120, 145, 0.6);
+  color: #ffd7e1;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 16px rgba(255, 95, 135, 0.2);
+}

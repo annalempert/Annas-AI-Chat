@@ -1,0 +1,8 @@
+/* Loading text shown while the assistant response is pending. */
+
+.spinner {
+  padding: 8px 10px;
+  color: #7ad5ff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(73, 173, 255, 0.5);
+}

@@ -1,0 +1,11 @@
+/* Layout shell styles for the main page container. */
+
+.layout {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 20px 30px;
+}
+
+.layout-main {
+  margin-top: 18px;
+}

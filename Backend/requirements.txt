@@ -1,0 +1,8 @@
+# Python dependencies for the FastAPI backend.
+fastapi
+uvicorn
+python-dotenv
+sqlalchemy
+pymysql
+pydantic
+openai

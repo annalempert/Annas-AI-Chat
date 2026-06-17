@@ -1,0 +1,28 @@
+/* Chat bubble styles for user and assistant messages. */
+
+.chat-message {
+  max-width: 72%;
+  margin: 8px 0;
+  padding: 11px 13px;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  border: 1px solid transparent;
+  line-height: 1.5;
+}
+
+/* User messages appear on the right side. */
+.chat-message.user {
+  margin-left: auto;
+  background: linear-gradient(130deg, rgba(87, 113, 255, 0.9), rgba(0, 174, 255, 0.65));
+  border-color: rgba(177, 221, 255, 0.45);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(89, 148, 255, 0.35);
+}
+
+/* Assistant messages appear on the left side. */
+.chat-message.assistant {
+  margin-right: auto;
+  background: rgba(17, 25, 52, 0.9);
+  border-color: rgba(118, 141, 243, 0.4);
+  color: #dbe5ff;
+}

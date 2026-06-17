@@ -1,0 +1,30 @@
+# Git ignore rules for the ChatGPT-like study project.
+
+# Environment files with secrets and local configuration.
+.env
+*.env
+!.env.example
+
+# Python build artifacts and virtual environments.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+Backend/.venv/
+Backend/venv/
+
+# Node dependencies and frontend build output.
+node_modules/
+Frontend/node_modules/
+dist/
+Frontend/tsconfig.tsbuildinfo
+
+# IDE and operating system files.
+.DS_Store
+Thumbs.db
+
+# Cursor workspace artifacts (not part of the study project).
+canvases/
+mcps/
