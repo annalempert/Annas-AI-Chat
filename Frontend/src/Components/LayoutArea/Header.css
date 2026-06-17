@@ -1,10 +1,47 @@
-/* Header title styles. */
+/* Centered 3D header title styles. */
 
 .header {
-  padding: 18px 0 14px;
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  color: #f6f8ff;
-  text-shadow: 0 0 16px rgba(92, 149, 255, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0 20px;
+}
+
+.header-title {
+  margin: 0;
+  perspective: 700px;
+}
+
+.header-title-3d {
+  display: inline-block;
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: #f0f5ff;
+  transform: rotateX(14deg);
+  transform-style: preserve-3d;
+  text-shadow:
+    0 1px 0 #8eb4ff,
+    0 2px 0 #7da8f8,
+    0 3px 0 #6c9cf0,
+    0 4px 0 #5b90e8,
+    0 5px 0 #4a84e0,
+    0 6px 0 #3978d8,
+    0 7px 0 #286cd0,
+    0 10px 16px rgba(0, 0, 0, 0.5),
+    0 0 32px rgba(90, 150, 255, 0.65),
+    0 0 60px rgba(60, 120, 255, 0.35);
+  animation: header-float 4s ease-in-out infinite;
+}
+
+@keyframes header-float {
+  0%,
+  100% {
+    transform: rotateX(14deg) translateY(0);
+  }
+
+  50% {
+    transform: rotateX(16deg) translateY(-4px);
+  }
 }
