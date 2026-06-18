@@ -1,0 +1,62 @@
+# DigitalOcean App Platform spec for Anna's AI Chat.
+# Docs: https://docs.digitalocean.com/products/app-platform/reference/app-spec/
+#
+# Before first deploy:
+# 1. Push this repo to GitHub (already done).
+# 2. In DO dashboard, create App -> Import from GitHub -> use this spec.
+# 3. Set OPENAI_API_KEY as an encrypted secret in the App Platform UI.
+# 4. After first deploy, verify CORS_ORIGINS matches your frontend URL.
+
+name: annas-ai-chat
+region: fra
+
+services:
+  - name: api
+    github:
+      repo: annalempert/Annas-AI-Chat
+      branch: master
+      deploy_on_push: true
+    source_dir: Backend
+    dockerfile_path: Dockerfile
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    health_check:
+      http_path: /api/health
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+      - key: OPENAI_API_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: OPENAI_MODEL
+        scope: RUN_TIME
+        value: gpt-4o-mini
+      - key: CORS_ORIGINS
+        scope: RUN_TIME
+        value: ${frontend.PUBLIC_URL}
+      - key: PORT
+        scope: RUN_TIME
+        value: "8080"
+
+  - name: frontend
+    github:
+      repo: annalempert/Annas-AI-Chat
+      branch: master
+      deploy_on_push: true
+    source_dir: Frontend
+    dockerfile_path: Dockerfile
+    http_port: 80
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: VITE_API_BASE_URL
+        scope: BUILD_TIME
+        value: ${api.PUBLIC_URL}
+
+databases:
+  - name: db
+    engine: MYSQL
+    version: "8"
+    production: true

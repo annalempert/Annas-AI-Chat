@@ -1,47 +1,67 @@
-/* Centered 3D header title styles. */
+/* Centered sharp 3D header title styles. */
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px 0 20px;
+  padding: 28px 0 12px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+/* Subtle glow plate behind the title for visibility. */
+.header::before {
+  content: "";
+  position: absolute;
+  width: min(520px, 90vw);
+  height: 72px;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at center, rgba(90, 140, 255, 0.22), transparent 70%);
+  filter: blur(8px);
+  z-index: 0;
 }
 
 .header-title {
   margin: 0;
-  perspective: 700px;
+  perspective: 800px;
+  position: relative;
+  z-index: 1;
 }
 
 .header-title-3d {
   display: inline-block;
-  font-size: clamp(1.75rem, 4vw, 2.4rem);
-  font-weight: 800;
-  letter-spacing: 0.05em;
+  font-size: clamp(2rem, 5vw, 2.85rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
   text-align: center;
-  color: #f0f5ff;
-  transform: rotateX(14deg);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transform: rotateX(10deg);
   transform-style: preserve-3d;
+  -webkit-text-stroke: 0.4px rgba(200, 230, 255, 0.35);
   text-shadow:
-    0 1px 0 #8eb4ff,
-    0 2px 0 #7da8f8,
-    0 3px 0 #6c9cf0,
-    0 4px 0 #5b90e8,
-    0 5px 0 #4a84e0,
-    0 6px 0 #3978d8,
-    0 7px 0 #286cd0,
-    0 10px 16px rgba(0, 0, 0, 0.5),
-    0 0 32px rgba(90, 150, 255, 0.65),
-    0 0 60px rgba(60, 120, 255, 0.35);
-  animation: header-float 4s ease-in-out infinite;
+    0 0 1px #ffffff,
+    0 1px 0 #a8c8ff,
+    0 2px 0 #88b0ff,
+    0 3px 0 #6898ff,
+    0 4px 0 #4880ef,
+    0 5px 0 #2868df,
+    0 8px 14px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(120, 180, 255, 0.9),
+    0 0 48px rgba(80, 140, 255, 0.55),
+    0 0 80px rgba(60, 120, 255, 0.3);
+  filter: drop-shadow(0 0 12px rgba(100, 160, 255, 0.5));
+  animation: header-float 5s ease-in-out infinite;
 }
 
 @keyframes header-float {
   0%,
   100% {
-    transform: rotateX(14deg) translateY(0);
+    transform: rotateX(10deg) translateY(0);
   }
 
   50% {
-    transform: rotateX(16deg) translateY(-4px);
+    transform: rotateX(11deg) translateY(-3px);
   }
 }

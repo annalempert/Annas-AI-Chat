@@ -1,0 +1,54 @@
+# Local full-stack run with Docker (backend, frontend, MySQL).
+# Usage:
+#   set OPENAI_API_KEY=your_key   (PowerShell: $env:OPENAI_API_KEY="your_key")
+#   docker compose up --build
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: chat-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: chat_app
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  backend:
+    build: ./Backend
+    container_name: chat-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8080"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:password@mysql:3306/chat_app
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: gpt-4o-mini
+      CORS_ORIGINS: http://localhost:8080
+      PORT: "8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./Frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    container_name: chat-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
