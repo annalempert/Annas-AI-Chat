@@ -41,10 +41,11 @@ Set real values in `Backend/.env`, including:
 
 - `MYSQL_ROOT_PASSWORD` — strong password for MySQL
 - `OPENAI_API_KEY` — your OpenAI key
-- `CORS_ORIGINS` — `http://YOUR_SERVER_IP:8080` (or your domain)
-- `VITE_API_BASE_URL` — `http://YOUR_SERVER_IP:8000` (or your API domain)
+- `CORS_ORIGINS` — `http://YOUR_SERVER_IP` (or your domain; use port 80, no `:80` suffix)
 
-Open in browser: `http://YOUR_SERVER_IP:8080`
+Open in browser: `http://YOUR_SERVER_IP`
+
+The frontend nginx container serves the app on port **80** and proxies `/api` to the backend internally, so the browser never calls `localhost:8000`.
 
 ### Alternative: DigitalOcean App Platform
 
