@@ -19,7 +19,36 @@ This repository contains a full-stack study project:
 3. Create backend virtual environment and install `Backend/requirements.txt`.
 4. Install frontend dependencies and run the Vite dev server.
 
-For Docker, use the same `Backend/.env` file: `docker compose up --build`.
+For Docker, use the same `Backend/.env` file:
+
+```bash
+docker compose --env-file Backend/.env up --build -d
+```
+
+## Deploy on Ubuntu server (DigitalOcean Droplet)
+
+`.env` files are **not** in GitHub on purpose. After `git clone`, create secrets on the server:
+
+```bash
+cd Annas-AI-Chat
+cp Backend/.env.example Backend/.env
+nano Backend/.env
+chmod 600 Backend/.env
+docker compose --env-file Backend/.env up --build -d
+```
+
+Set real values in `Backend/.env`, including:
+
+- `MYSQL_ROOT_PASSWORD` — strong password for MySQL
+- `OPENAI_API_KEY` — your OpenAI key
+- `CORS_ORIGINS` — `http://YOUR_SERVER_IP:8080` (or your domain)
+- `VITE_API_BASE_URL` — `http://YOUR_SERVER_IP:8000` (or your API domain)
+
+Open in browser: `http://YOUR_SERVER_IP:8080`
+
+### Alternative: DigitalOcean App Platform
+
+If you use App Platform (`.do/app.yaml`) instead of `docker compose` on a Droplet, secrets are set in the DigitalOcean dashboard — no `Backend/.env` file on the server. App Platform provides managed MySQL and injects `DATABASE_URL` and `OPENAI_API_KEY` for you.
 
 ## Useful commands
 
